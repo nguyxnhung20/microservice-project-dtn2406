@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk
 
-LABEL authors="hungnv"
+LABEL authors="hungnd"
 
 WORKDIR /app
 
