@@ -36,10 +36,13 @@ CREATE TABLE users (
     lastname varchar(20),
     access_token varchar(255),
     refresh_token varchar(255),
-    role ENUM('USER','ADMIN','MANAGER') NOT NULL,
+    role ENUM('USER','ADMIN','MANAGER'),
     PRIMARY KEY (id),
     UNIQUE KEY (username),
     UNIQUE KEY (email)
+    image_url VARCHAR(255),
+    provider ENUM('local', 'facebook', 'google', 'github'),
+    provider_id VARCHAR(255)
  );
 
   -- Create table refreshtoken
