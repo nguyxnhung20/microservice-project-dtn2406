@@ -7,21 +7,21 @@ USE microservice;
 -- Create table department
 DROP TABLE IF EXISTS department;
 CREATE TABLE IF NOT EXISTS department (
-    id 						INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name 					NVARCHAR(100) NOT NULL UNIQUE KEY,
-    total_member			INT	UNSIGNED,
-    type					ENUM('DEV','TEST','SCRUM_MASTER','PM') NOT NULL,
-    created_at      		DATETIME DEFAULT NOW()
+    id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name                NVARCHAR(100) NOT NULL UNIQUE KEY,
+    total_member          INT    UNSIGNED,
+    type                ENUM('DEV','TEST','SCRUM_MASTER','PM') NOT NULL,
+    created_at             DATETIME DEFAULT NOW()
 );
 
 -- create table: account
 DROP TABLE IF EXISTS account;
 CREATE TABLE account(
-    id						INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username				VARCHAR(50) NOT NULL UNIQUE KEY,
-    firstname				VARCHAR(50),
-    lastname				VARCHAR(50),
-    department_id 			INT UNSIGNED NOT NULL,
+    id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username             VARCHAR(50) NOT NULL UNIQUE KEY,
+    firstname            VARCHAR(50),
+    lastname             VARCHAR(50),
+    department_id         INT UNSIGNED NOT NULL,
     FOREIGN KEY(department_id) REFERENCES department(id)
 );
 
@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id bigint NOT NULL AUTO_INCREMENT,
     email varchar(50) NOT NULL,
-    password varchar(120) NOT NULL,
+    password varchar(120),
     username varchar(20) NOT NULL,
     firstname varchar(20),
     lastname varchar(20),
@@ -39,7 +39,7 @@ CREATE TABLE users (
     role ENUM('USER','ADMIN','MANAGER'),
     PRIMARY KEY (id),
     UNIQUE KEY (username),
-    UNIQUE KEY (email)
+    UNIQUE KEY (email),
     image_url VARCHAR(255),
     provider ENUM('local', 'facebook', 'google', 'github'),
     provider_id VARCHAR(255)
@@ -88,30 +88,30 @@ CREATE TABLE users (
  -- INSERT DATA
  -- =============================================
  -- Add data department
- INSERT INTO department(	name, 		total_member, 	type, 		    created_at)
+ INSERT INTO department(    name,     total_member,  type,         created_at)
  VALUES
- 						(N'Marketing'	, 		1,		'DEV', 			'2020-03-05'),
- 						(N'Sale'		, 		2,		'TEST', 		'2020-03-05'),
- 						(N'Bảo vệ'		, 		3,		'SCRUM_MASTER', '2020-03-07'),
- 						(N'Nhân sự'		, 		4,		'PM', 			'2020-03-08'),
- 						(N'Kỹ thuật'	, 		5,		'DEV', 			'2020-03-10'),
- 						(N'Tài chính'	, 		6,		'SCRUM_MASTER',  NOW()		),
- 						(N'Phó giám đốc', 		7,		'PM', 			 NOW()		),
- 						(N'Giám đốc'	, 		8,		'TEST', 		'2020-04-07'),
- 						(N'Thư kí'		, 		9,		'PM', 			'2020-04-07'),
- 						(N'Bán hàng'	, 		1,		'DEV', 			'2020-04-09');
+                   (N'Marketing'  ,     1,    'DEV',           '2020-03-05'),
+                   (N'Sale'      ,     2,    'TEST',       '2020-03-05'),
+                   (N'Bảo vệ'    ,     3,    'SCRUM_MASTER', '2020-03-07'),
+                   (N'Nhân sự'       ,     4,    'PM',        '2020-03-08'),
+                   (N'Kỹ thuật'   ,     5,    'DEV',           '2020-03-10'),
+                   (N'Tài chính'  ,     6,    'SCRUM_MASTER',  NOW()    ),
+                   (N'Phó giám đốc',     7,    'PM',         NOW()    ),
+                   (N'Giám đốc'   ,     8,    'TEST',       '2020-04-07'),
+                   (N'Thư kí'    ,     9,    'PM',        '2020-04-07'),
+                   (N'Bán hàng'   ,     1,    'DEV',           '2020-04-09');
 
  -- Add data account
- INSERT INTO account(	username		,	department_id	)
- VALUES 			(	'dangblack'		,   	'5'			),
- 					(	'quanganh'		,		'1'			),
-                    (	'vanchien'		,		'1'			),
-                    (	'cocoduongqua'	,		'1'			),
-                    (	'doccocaubai'	,   	'2'			),
-                    (	'khabanh'		,   	'2'			),
-                    (	'huanhoahong'	,   	'2'			),
-                    (	'tungnui'		,   	'8'			),
-                    (	'duongghuu'		,   	'9'			);
+ INSERT INTO account(   username      ,  department_id  )
+ VALUES           (  'dangblack'       ,      '5'          ),
+                (  'quanganh'    ,     '1'          ),
+                    (   'vanchien'    ,     '1'          ),
+                    (   'cocoduongqua' ,     '1'          ),
+                    (   'doccocaubai'  ,      '2'          ),
+                    (   'khabanh'     ,      '2'          ),
+                    (   'huanhoahong'  ,      '2'          ),
+                    (   'tungnui'     ,      '8'          ),
+                    (   'duongghuu'       ,      '9'          );
 
  -- Add data refreshtoken_seq
  INSERT INTO refreshtoken_seq VALUES (1);
